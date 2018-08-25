@@ -471,24 +471,30 @@ var DeckPage = /** @class */ (function () {
             var _this = this;
             var loading, f_a, total_money, mp_a;
             return __generator(this, function (_a) {
-                loading = this.loadingCtrl.create({
-                    content: 'Please wait...'
-                });
-                loading.present();
-                f_a = Array(count).fill('').map(function () {
-                    return _this.calc.follow_turn(_this.field_status);
-                });
-                total_money = 0;
-                mp_a = f_a.map(function (val) {
-                    total_money += val.money_point;
-                    return val.money_point;
-                });
-                this.deck_length = this.field_status.deck.length;
-                this.avarage_money = total_money / count;
-                this.max_money = Math.max.apply(Math, mp_a);
-                this.min_money = Math.min.apply(Math, mp_a);
-                loading.dismiss();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        loading = this.loadingCtrl.create({
+                            content: 'Please wait...'
+                        });
+                        return [4 /*yield*/, loading.present()];
+                    case 1:
+                        _a.sent();
+                        f_a = Array(count).fill('').map(function () {
+                            return _this.calc.follow_turn(_this.field_status);
+                        });
+                        total_money = 0;
+                        mp_a = f_a.map(function (val) {
+                            total_money += val.money_point;
+                            return val.money_point;
+                        });
+                        // 結果をビューに送る
+                        this.deck_length = this.field_status.deck.length;
+                        this.avarage_money = total_money / count;
+                        this.max_money = Math.max.apply(Math, mp_a);
+                        this.min_money = Math.min.apply(Math, mp_a);
+                        loading.dismiss();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -557,7 +563,7 @@ var DeckPage = /** @class */ (function () {
     };
     DeckPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-deck',template:/*ion-inline-start:"C:\Git_workspace\dominion-cal\src\pages\deck\deck.html"*/'<!--\n\n  Generated template for the DeckPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>deck</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-card>\n\n    <ion-card-header>\n\n        <ion-title>出力金貨量</ion-title>\n\n    </ion-card-header>\n\n    <ion-card-content>\n\n      <p>平均値: {{avarage_money}}</p>\n\n      <p>最大値: {{max_money}}</p>\n\n      <p>最小値: {{min_money}}</p>\n\n      <p>デッキ枚数: {{deck_length}}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n\n\n  <button ion-button full (click)="calc_money(100)">計算する</button>\n\n\n\n  <mat-accordion>\n\n    <mat-expansion-panel *ngFor="let a of field_status.deck_index">\n\n      <mat-expansion-panel-header>\n\n        <mat-panel-title>\n\n            <ion-title>{{a.card.name}} ×{{a.cnt}}</ion-title>\n\n          <ion-buttons end>\n\n            <button ion-button (click)="add_card(a.card)">+</button>\n\n            <button ion-button (click)="delete_card(a.card)">-</button>\n\n          </ion-buttons>\n\n\n\n        </mat-panel-title>\n\n\n\n      </mat-expansion-panel-header>\n\n\n\n      <p>タイプ: {{a.card.type}}</p>\n\n      <p>金: {{a.card.money_point}}</p>\n\n      <p>アクション: {{a.card.action_point}}</p>\n\n      <p>ドロー: {{a.card.draw_num}}</p>\n\n\n\n    </mat-expansion-panel>\n\n  </mat-accordion>\n\n\n\n  <button ion-button full color="danger" (click)="delete_all()">全カード削除</button>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Git_workspace\dominion-cal\src\pages\deck\deck.html"*/,
+            selector: 'page-deck',template:/*ion-inline-start:"C:\Git_workspace\dominion-cal\src\pages\deck\deck.html"*/'<!--\n\n  Generated template for the DeckPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>deck</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-card>\n\n    <ion-card-header>\n\n        <ion-title>出力金貨量</ion-title>\n\n    </ion-card-header>\n\n    <ion-card-content>\n\n      <p>平均値: {{avarage_money}}</p>\n\n      <p>最大値: {{max_money}}</p>\n\n      <p>最小値: {{min_money}}</p>\n\n      <p>デッキ枚数: {{deck_length}}</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n\n\n  <button ion-button full (click)="calc_money(1000)">計算する</button>\n\n\n\n  <mat-accordion>\n\n    <mat-expansion-panel *ngFor="let a of field_status.deck_index">\n\n      <mat-expansion-panel-header>\n\n        <mat-panel-title>\n\n            <ion-title>{{a.card.name}} ×{{a.cnt}}</ion-title>\n\n          <ion-buttons end>\n\n            <button ion-button (click)="add_card(a.card)">+</button>\n\n            <button ion-button (click)="delete_card(a.card)">-</button>\n\n          </ion-buttons>\n\n\n\n        </mat-panel-title>\n\n\n\n      </mat-expansion-panel-header>\n\n\n\n      <p>タイプ: {{a.card.type}}</p>\n\n      <p>金: {{a.card.money_point}}</p>\n\n      <p>アクション: {{a.card.action_point}}</p>\n\n      <p>ドロー: {{a.card.draw_num}}</p>\n\n\n\n    </mat-expansion-panel>\n\n  </mat-accordion>\n\n\n\n  <button ion-button full color="danger" (click)="delete_all()">全カード削除</button>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Git_workspace\dominion-cal\src\pages\deck\deck.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
